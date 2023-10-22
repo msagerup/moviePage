@@ -10,6 +10,7 @@ const Movies = ({ movies, fetchMoreMovies }) => {
       {movies.movies.results?.map((movie) => {
         return <Movie key={movie.id} movie={movie} />;
       })}
+      {/* When seeing this, we will load more data. */}
       <div ref={loadMoreRef}></div>
     </div>
   );
