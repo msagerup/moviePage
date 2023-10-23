@@ -63,8 +63,10 @@ const App = () => {
   };
 
   const fetchMoreMovies = () => {
-    setPage((prevPage) => prevPage + 1);
-    getMovies();
+    if (movies.fetchStatus !== "loading") {
+      setPage((prevPage) => prevPage + 1);
+      getMovies();
+    }
   };
 
   useEffect(() => {
@@ -81,7 +83,7 @@ const App = () => {
 
   return (
     <div className='App'>
-      <Header searchMovies={searchMovies} />
+      <Header searchMovies={searchMovies} setPage={setPage} />
       <div className='container'>
         <Routes>
           <Route

@@ -7,11 +7,14 @@ const Movies = ({ movies, fetchMoreMovies }) => {
 
   return (
     <div data-testid='movies' className='grid'>
-      {movies.movies.results?.map((movie) => {
-        return <Movie key={movie.id} movie={movie} />;
+      {movies.movies.results?.map((movie, index, arr) => {
+        if (arr.length - 1 === index) {
+          // Set the ref to the last element.
+          return <Movie key={movie.id} movie={movie} ref={loadMoreRef} />;
+        } else {
+          return <Movie key={movie.id} movie={movie} />;
+        }
       })}
-      {/* When seeing this, we will load more data. */}
-      <div ref={loadMoreRef}></div>
     </div>
   );
 };

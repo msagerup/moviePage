@@ -3,12 +3,20 @@ import { Link, NavLink } from "react-router-dom";
 
 import "../styles/header.scss";
 
-const Header = ({ searchMovies }) => {
+const Header = ({ searchMovies, setPage }) => {
   const { starredMovies } = useSelector((state) => state.starred);
 
   return (
     <header>
-      <Link to='/' data-testid='home' onClick={() => searchMovies("")}>
+      <Link
+        to='/'
+        data-testid='home'
+        onClick={() => {
+          window.scrollTo(0, 0);
+          setPage(1);
+          searchMovies("");
+        }}
+      >
         <i className='bi bi-film' />
       </Link>
       <nav>
@@ -32,7 +40,15 @@ const Header = ({ searchMovies }) => {
       </nav>
 
       <div className='input-group rounded'>
-        <Link to='/' onClick={() => searchMovies("")} className='search-link'>
+        <Link
+          to='/'
+          onClick={() => {
+            window.scrollTo(0, 0);
+            setPage(1);
+            searchMovies("");
+          }}
+          className='search-link'
+        >
           <input
             type='search'
             data-testid='search-movies'

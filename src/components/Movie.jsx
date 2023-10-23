@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { forwardRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import placeholder from "../assets/not-found-500X750.jpeg";
 import starredSlice from "../data/starredSlice";
 import watchLaterSlice from "../data/watchLaterSlice";
 import Modal from "./Modal";
 
-const Movie = ({ movie }) => {
+const Movie = forwardRef((props, ref) => {
+  const { movie } = props;
   const state = useSelector((state) => state);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { starred, watchLater } = state;
@@ -20,7 +21,7 @@ const Movie = ({ movie }) => {
 
   return (
     <>
-      <div className='card'>
+      <div ref={ref} className='card'>
         <div className='card-body text-center'>
           <div className='overlay' />
           <div className='info_panel'>
@@ -112,6 +113,6 @@ const Movie = ({ movie }) => {
       )}
     </>
   );
-};
+});
 
 export default Movie;
