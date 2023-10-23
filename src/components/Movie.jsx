@@ -96,6 +96,7 @@ const Movie = forwardRef((props, ref) => {
             </button>
           </div>
           <img
+            loading='lazy'
             className='center-block'
             src={
               movie.poster_path
