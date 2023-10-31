@@ -1,22 +1,22 @@
-import Movie from './Movie'
-import '../styles/movies.scss'
+import useInfiniteScroll from "../Hooks/useInfiniteScroll";
+import "../styles/movies.scss";
+import Movie from "./Movie";
 
-const Movies = ({ movies, viewTrailer, closeCard }) => {
+const Movies = ({ movies, fetchMoreMovies }) => {
+  const loadMoreRef = useInfiniteScroll(fetchMoreMovies);
 
-    return (
-        <div data-testid="movies">
-            {movies.movies.results?.map((movie) => {
-                return (
-                    <Movie 
-                        movie={movie} 
-                        key={movie.id}
-                        viewTrailer={viewTrailer}
-                        closeCard={closeCard}
-                    />
-                )
-            })}
-        </div>
-    )
-}
+  return (
+    <div data-testid='movies' className='grid'>
+      {movies.movies.results?.map((movie, index, arr) => {
+        if (arr.length - 1 === index) {
+          // Set the ref to the last element.
+          return <Movie key={movie.id} movie={movie} ref={loadMoreRef} />;
+        } else {
+          return <Movie key={movie.id} movie={movie} />;
+        }
+      })}
+    </div>
+  );
+};
 
-export default Movies
+export default Movies;
